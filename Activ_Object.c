@@ -3,8 +3,13 @@
 #include <pthread.h>
 #include <unistd.h>
 
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER; 
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+pthread_cond_t cond_Active_Object = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
+pthread_t p3;
+
+void *f1;
+void *f2;
 
 struct QNode {
 	void* key;
@@ -23,7 +28,6 @@ struct QNode* newNode(void* k)
 	return temp;
 }
 
-// A utility function to create an empty queue
 struct Queue* createQ()
 { 
 	struct Queue* q = (struct Queue*)malloc(sizeof(struct Queue));
@@ -31,41 +35,33 @@ struct Queue* createQ()
 	return q;
 }
 
-// The function to add a key k to q
 void enQ(struct Queue* q, void* k)
 {
 	struct QNode* temp = newNode(k);
-
 	if (q->rear == NULL) {
 		q->front = q->rear = temp;
-        pthread_cond_signal(&cond);
+        // pthread_cond_signal(&cond);
 		return;
 	}
 	q->rear->next = temp;
 	q->rear = temp;
 }
 
-// Function to remove a key from given queue q
 void deQ(struct Queue* q)
 {
     pthread_mutex_lock(&mut);
-    
     if(q->front == NULL)
     {
     pthread_cond_wait(&cond,&mut);
     }
-
-	// Store previous front and move front one node ahead
 	struct QNode* temp = q->front;
 	q->front = q->front->next;
-	// If front becomes NULL, then change rear also as NULL
 	if (q->front == NULL)
 		    q->rear = NULL;
-
 	free(temp);
-    
     pthread_mutex_unlock(&mut);
 }
+
 
 void destoryQ(struct Queue *q)
 {
@@ -76,14 +72,49 @@ void destoryQ(struct Queue *q)
     free(q);
 }
 
-// Driver Program to test anove functions
-int main()
+
+/////////////////////////////////////////////////////////////////////////////
+
+void* funk1(struct Queue q)
 {
-        
+    return q.rear->key;
+}
+
+void funk2(int res)
+{
+    printf("new number in the Queue: %d\n",res);
+}
+
+void newAo(Queue *q,void *fa1,void *fa2)
+{
+    // while(q->front == NULL)
+    // {
+        // pthread_cond_wait(&cond_Active_Object,&mut);
+    // }
+
+    printf("hiiiiiiiiiiiiiiiii ");
+    // int res = funk1(*q);
+    // funk2(res);
+    printf  ("there ");
+    return;    
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+int main()
+{        
     struct Queue *q = createQ();
     int t = 10;
     pthread_t p1,p2;
     void * temp[2] = {q, &t};
+    
+
+     if(pthread_create(&p3,NULL,&newAo,(*q,f1,f2)) != 0)
+    {
+        return 1;
+    }
 
     if(pthread_create(&p1,NULL,&enQ,temp) != 0)
     {
@@ -94,16 +125,16 @@ int main()
     {
         return 1;
     }
-    pthread_join(p1 , NULL);
+
     
+    pthread_join(p1, NULL);
+    // pthread_join(p3, NULL);
+   
 	enQ(q, 10);
 	enQ(q, 20);
-	deQ(q);
-	deQ(q);
 	enQ(q, 30);
 	enQ(q, 40);
 	enQ(q, 50);
-	deQ(q);
 	printf("Queue Front : %d \n", q->front->key);
 	printf("Queue Rear : %d\n", q->rear->key);
     destoryQ(q);
@@ -111,3 +142,8 @@ int main()
     pthread_cond_destroy(&cond);
 	return 0;
 }
+
+
+
+
+
