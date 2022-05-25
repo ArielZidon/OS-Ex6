@@ -6,12 +6,13 @@
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER; 
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 
-struct QNode {
+typedef struct QNode {
 	void* key;
 	struct QNode* next;
-};
+}QNode;
 
 typedef struct Queue {
+	int size;
 	struct QNode *front, *rear;
 }Queue;
 
@@ -28,6 +29,7 @@ struct Queue* createQ()
 { 
 	struct Queue* q = (struct Queue*)malloc(sizeof(struct Queue));
 	q->front = q->rear = NULL;
+	q->size = 0;
 	return q;
 }
 
@@ -39,10 +41,12 @@ void enQ(struct Queue* q, void* k)
 	if (q->rear == NULL) {
 		q->front = q->rear = temp;
         pthread_cond_signal(&cond);
+		q->size++;
 		return;
 	}
 	q->rear->next = temp;
 	q->rear = temp;
+	q->size++;
 }
 
 // Function to remove a key from given queue q
@@ -63,7 +67,7 @@ void deQ(struct Queue* q)
 		    q->rear = NULL;
 
 	free(temp);
-    
+    q->size--;
     pthread_mutex_unlock(&mut);
 }
 
