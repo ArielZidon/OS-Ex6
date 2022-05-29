@@ -1,104 +1,85 @@
-#include "Queue.h"
+#include"Queue.h"
 
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER; 
-pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
+queue* createQ() {
+    queue* Q = (queue*)malloc(sizeof(queue));
+    Q->front = Q->rear = nullptr;
+    Q->lastVal = nullptr;
+    Q->size = 0;
+    pthread_mutex_init(&Q->mut, NULL);
+    pthread_cond_init(&Q->deQ_Wait, NULL);
 
-struct QNode* newNode(void* k)
-{
-	struct QNode* temp = (struct QNode*)malloc(sizeof(struct QNode));
-	temp->key = k;
-	temp->next = NULL;
-	return temp;
+    return Q;
 }
 
-// A utility function to create an empty queue
-struct Queue* createQ()
-{ 
-	struct Queue* q = (struct Queue*)malloc(sizeof(struct Queue));
-	q->front = q->rear = NULL;
-	q->size = 0;
-	return q;
-}
-
-// The function to add a key k to q
-void enQ(struct Queue* q, void* k)
-{
-	struct QNode* temp = newNode(k);
-
-	if (q->rear == NULL) {
-		q->front = q->rear = temp;
-        pthread_cond_signal(&cond);
-		q->size++;
-		return;
-	}
-	q->rear->next = temp;
-	q->rear = temp;
-	q->size++;
-}
-
-// Function to remove a key from given queue q
-void deQ(struct Queue* q)
-{
-    pthread_mutex_lock(&mut);
-    
-    if(q->front == NULL)
-    {
-    pthread_cond_wait(&cond,&mut);
+void destroyQ(queue* Q) {
+    while (Q->size!=0) { 
+        deQ(Q);
     }
-
-	// Store previous front and move front one node ahead
-	struct QNode* temp = q->front;
-	q->front = q->front->next;
-	// If front becomes NULL, then change rear also as NULL
-	if (q->front == NULL)
-		    q->rear = NULL;
-
-	free(temp);
-    q->size--;
-    pthread_mutex_unlock(&mut);
-}
-
-void destoryQ(struct Queue *q)
-{
-    while(q->front!=NULL)
-    {
-        deQ(q);
+    if (Q->lastVal!=NULL) {
+        free(Q->lastVal);
     }
-    free(q);
+    pthread_cond_broadcast(&Q->deQ_Wait);
+    pthread_cond_destroy(&Q->deQ_Wait);
+    pthread_mutex_destroy(&Q->mut);
+    free(Q);
 }
 
-// // Driver Program to test anove functions
-// int main()
-// {
-        
-//     struct Queue *q = createQ();
-//     int t = 10;
-//     pthread_t p1,p2;
-//     void * temp[2] = {q, &t};
+bool enQ(void* n, queue* Q) {
+    pthread_mutex_lock(&(Q->mut));
+    if (Q->size==0) {
+        struct node* newNode = (struct node*)malloc(sizeof(struct node));
+        newNode->value = malloc(2048);
+        memcpy(newNode->value, n, 2048);
+        newNode->next = newNode->prev = nullptr;
+        Q->front = Q->rear = newNode;
+        Q->size++;
+        pthread_mutex_unlock(&(Q->mut));
+        pthread_cond_signal(&Q->deQ_Wait);
+        return true;
+    }
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->value = malloc(2048);
+    memcpy(newNode->value, n, 2048);
+    Q->rear->prev = newNode;
+    newNode->next = Q->rear;
+    newNode->prev = nullptr;
+    Q->rear = newNode;
+    Q->size++;
+    pthread_mutex_unlock(&(Q->mut));
+    return true; 
+}
 
-//     if(pthread_create(&p1,NULL,&enQ,temp) != 0)
-//     {
-//         return 1;
-//     }
-        
-//     if(pthread_create(&p2,NULL,&deQ,q) != 0)
-//     {
-//         return 1;
-//     }
-//     pthread_join(p1 , NULL);
-    
-// 	enQ(q, 10);
-// 	enQ(q, 20);
-// 	deQ(q);
-// 	deQ(q);
-// 	enQ(q, 30);
-// 	enQ(q, 40);
-// 	enQ(q, 50);
-// 	deQ(q);
-// 	printf("Queue Front : %d \n", q->front->key);
-// 	printf("Queue Rear : %d\n", q->rear->key);
-//     destoryQ(q);
-//     pthread_mutex_destroy(&mut);
-//     pthread_cond_destroy(&cond);
-// 	return 0;
-// }
+void* deQ(queue* Q) {
+    pthread_mutex_lock(&(Q->mut));
+	if (Q->size==-1) {
+        return NULL;
+    }
+    if (Q->size==0) {
+        pthread_cond_wait(&Q->deQ_Wait, &Q->mut);
+    }
+    if (Q->size==0) {
+        pthread_exit(NULL);
+    }
+    if (Q->lastVal!=NULL) {
+        free(Q->lastVal);
+    }
+    if (Q->size==1) {
+        Q->lastVal = malloc(2048);
+        memcpy(Q->lastVal, Q->front->value, 2048);
+        free(Q->front->value);
+        free(Q->front);
+        Q->size--;
+        pthread_mutex_unlock(&(Q->mut));
+        return Q->lastVal;
+    }
+    Q->lastVal = malloc(2048);
+    memcpy(Q->lastVal, Q->front->value, 2048);
+    struct node* tempNode = Q->front->prev;
+    tempNode->next = nullptr;
+    free(Q->front->value);
+    free(Q->front);
+    Q->front = tempNode;
+    Q->size--;
+    pthread_mutex_unlock(&(Q->mut));
+    return Q->lastVal;
+}

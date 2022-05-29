@@ -27,7 +27,7 @@ void *get_in_addr(struct sockaddr *sa)
 
 int main(int argc, char *argv[])
 {
-    int sockfd, numbytes;
+    int sockfd, length;
     char buf[1024];
     struct addrinfo hints, *servinfo, *p;
     int rv;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // loop through all the results and connect to the first we can
+    // loop through all the results and connect to the q1 we can
     for(p = servinfo; p != NULL; p = p->ai_next) {
         if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
             perror("client: socket");
@@ -71,21 +71,21 @@ int main(int argc, char *argv[])
 
     freeaddrinfo(servinfo); // all done with this structure
    
-    char str[1029] = {'\0'};
-    char temp[1024] = {'\0'};
+    char str[2048] = {'\0'};
+    char temp[2048] = {'\0'};
     scanf("%[^\n]%*c", str);
-    while (strncmp(str, "EXIT", 4))
+    while (1)
     {
         printf("->");
         if(send(sockfd, str, strlen(str), 0) == -1){
             printf("ERROR! from client");
             exit(1);
         } 
-        if ((numbytes = recv(sockfd, str, 1024-1, 0)) == -1) {
+        if ((length = recv(sockfd, str, 1024-1, 0)) == -1) {
             perror("recv");
             exit(1);
         }
-        str[numbytes] = '\0';
+        str[length] = '\0';
         printf("client: received '%s'\n",str);
         bzero(str, 1024);
         scanf("%[^\n]%*c", str);

@@ -59,11 +59,11 @@ int main()
     FILE *temp;
     Singleton<FILE *> *a = Singleton<FILE *>::Instance(temp);
     Singleton<FILE *> *b = Singleton<FILE *>::Instance(temp);
-    cout << "first file: "<<a<< endl;
+    cout << "q1 file: "<<a<< endl;
     cout << "second file: "<<b<<"\n"<<endl;
     if (a == b)
     {
-        cout << "its work!!, A build the first object!\nB try to build another one but the object was catch by A..\n" << endl;
+        cout << "its work!!, A build the q1 object!\nB try to build another one but the object was catch by A..\n" << endl;
     }
     else
     {

@@ -1,28 +1,33 @@
 #include "Active_Object.h"
+#include "Queue.h"
 
-void* runf(void* newO)
-{
-    AO *Active_Object = (AO*)newO;
-    while (Active_Object->running) { 
-        void* temp = Active_Object->Q->front;
-        deQ(Active_Object->Q);
-        
-        void* runingNow = Active_Object->first_func(temp); 
-        void* result = Active_Object->after_func(runingNow);
+#include <stdlib.h>
+#include <stdio.h>
+
+
+void* runAO(void* temp) {
+    AO *active_Obj = (AO*)temp;
+    while (active_Obj->run) { 
+        void* handled_now = active_Obj->f1(deQ(active_Obj->Q)); // wait on cond
+        void* result = active_Obj->f2(handled_now);
     }
-} 
+    free(active_Obj->p);
+    free(active_Obj);
+}
 
+AO* newAO(queue* Q, void* f1, void* f2) {
+    AO *active_Obj = (AO*)malloc(sizeof(AO));
+    active_Obj->f1 = f1;
+    active_Obj->f2 = f2;
+    active_Obj->Q = Q;
+    active_Obj->run = 1;
+    active_Obj->p = (pthread_t*)malloc(sizeof(pthread_t));
+    pthread_create(active_Obj->p,NULL, runAO, (void*)active_Obj);
+    return active_Obj;
+}
 
-AO* newAO(Queue *q,void* first_funk,void* after_funk)
-{   
-    
-    AO *actO = (AO*)malloc(sizeof(AO));
-    actO->first_func = first_funk;
-    actO->after_func = after_funk;
-    actO->Q = q;
-    actO->running = 1;
-    actO->t = (pthread_t*)malloc(sizeof(pthread_t));
-    pthread_create(actO->t,NULL, runf, (void*)actO);
-    printf("AO is create \n");
-    return actO;
+void destroyAO(AO* active_Obj) {
+    active_Obj->run=false;
+    free(active_Obj->p);
+    free(active_Obj);
 }
