@@ -18,7 +18,7 @@
 
 
 pthread_t thread_id[BACKLOG];
-int new_fd[BACKLOG];
+int new_fd;
 
 int sockfd; 
 bool on;
@@ -74,7 +74,7 @@ void sig_handler(int signum)
         on = 0;
         for (size_t i = 0; i < BACKLOG; i++)
         {
-            close(new_fd[i]);
+            close(new_fd);
         }
 
         close(sockfd);
@@ -95,22 +95,26 @@ void sig_handler(int signum)
 //Active Object func
 /*****************************************************************************/
 
-void* insertQ1(void* temp) {
+void* insertQ1(void* temp) 
+{
     enQ(temp, q1);
     return temp;
 }
 
-void* insertQ2(void* temp) {
+void* insertQ2(void* temp) 
+{
     enQ(temp, q2);
     return temp;
 }
 
-void* insertQ3(void* temp) {
+void* insertQ3(void* temp) 
+{
     enQ(temp, q3);
     return temp;
 }
 
-void* nopPoent(void* temp) {
+void* nopPoent(void* temp) 
+{
     return temp;
 }
 
@@ -141,9 +145,6 @@ void* s_func(void* temp)
         if (res->txt[j]>='a'&&res->txt[j]<='z') {
             res->txt[j] -= 32;
         } 
-        else if (res->txt[j]>='A'&&res->txt[j]<='Z') {
-            res->txt[j] += 32;
-        }
     }
     return temp;
 }
@@ -230,8 +231,8 @@ int main(void)
 
         while(1) {  // main accept() loop
         sin_size = sizeof their_addr;
-        new_fd[j] = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
-        if (new_fd[j] == -1) {
+        new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
+        if (new_fd == -1) {
             perror("accept");
             continue;
         }
@@ -240,7 +241,7 @@ int main(void)
         get_in_addr((struct sockaddr *)&their_addr), s, sizeof s);
         printf("server: got connection from %s\n", s);
 
-        pthread_create(&thread_id[j%BACKLOG], NULL, clientThread, &new_fd[j]);
+        pthread_create(&thread_id[j%BACKLOG], NULL, clientThread, &new_fd);
         j++;
     }
 

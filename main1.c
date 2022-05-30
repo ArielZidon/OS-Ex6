@@ -1,17 +1,18 @@
 #include"Queue.h"
 
-queue* createQ() {
+queue* createQ() 
+{
     queue* Q = (queue*)malloc(sizeof(queue));
     Q->front = Q->rear = nullptr;
     Q->lastVal = nullptr;
     Q->size = 0;
     pthread_mutex_init(&Q->mut, NULL);
     pthread_cond_init(&Q->deQ_Wait, NULL);
-
     return Q;
 }
 
-void destroyQ(queue* Q) {
+void destroyQ(queue* Q) 
+{
     while (Q->size!=0) { 
         deQ(Q);
     }
@@ -24,9 +25,11 @@ void destroyQ(queue* Q) {
     free(Q);
 }
 
-bool enQ(void* n, queue* Q) {
+bool enQ(void* n, queue* Q) 
+{
     pthread_mutex_lock(&(Q->mut));
-    if (Q->size==0) {
+    if (Q->size==0) 
+    {
         struct node* newNode = (struct node*)malloc(sizeof(struct node));
         newNode->value = malloc(2048);
         memcpy(newNode->value, n, 2048);
@@ -37,6 +40,7 @@ bool enQ(void* n, queue* Q) {
         pthread_cond_signal(&Q->deQ_Wait);
         return true;
     }
+    
     struct node* newNode = (struct node*)malloc(sizeof(struct node));
     newNode->value = malloc(2048);
     memcpy(newNode->value, n, 2048);

@@ -13,7 +13,7 @@
 #include <arpa/inet.h>
 
 #define PORT "3490" // the port client will be connecting to 
-#define MAXDATASIZE 1024 // max number of bytes we can get at once 
+#define MAXDATASIZE 2048 // max number of bytes we can get at once 
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -27,6 +27,7 @@ void *get_in_addr(struct sockaddr *sa)
 
 int main(int argc, char *argv[])
 {
+    char *names[7] = {"Ariel","Zidon", "Afik","adiyarden","danielzAKen","dviR","dvirGev"};
     int sockfd, length;
     char buf[1024];
     struct addrinfo hints, *servinfo, *p;
@@ -73,21 +74,25 @@ int main(int argc, char *argv[])
    
     char str[2048] = {'\0'};
     char temp[2048] = {'\0'};
-    scanf("%s", str);
-    while (1)
-    {
-        printf("->");
+    bzero(str, 2048);
+    for(int i=0;i<20;i++)
+    {   
+        sleep(1);
+        strcpy(str, names[rand() % 7]);
+        for (int i = 0; i < strlen(str); i++)
+        {
+            printf("%c", str[i]);
+        }
+        printf(" -> ");
         if(send(sockfd, str, strlen(str), 0) == -1){
             printf("ERROR! from client");
             exit(1);
         } 
-        bzero(str, 2048);
         if ((length = recv(sockfd, str,2048, 0)) == -1) {
             perror("recv");
             exit(1);
         }
         str[length] = '\0';
-        printf("client: received ");
         for (int i = 0; i < strlen(str); i++)
         {
             printf("%c", str[i]);
@@ -96,7 +101,6 @@ int main(int argc, char *argv[])
         
         //printf("client: received '%s '\n",str);
         bzero(str, 2048);
-        scanf("%s", str);
     }
     
     close(sockfd);
