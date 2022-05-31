@@ -1,22 +1,22 @@
 .PHONY: all run clean
 CC = gcc
-CXX=clang++-9 -std=c++2a
+CXX= g++
 FLAGS= 
 HEADERS = Queue.h Active_Object.h 
-all: server main1 client Active_Object
+all: server main1 client Active_Object 
 
 
-server: server.o $(HEADERS)
-	$(CC) $< main1.o Active_Object -o server -lpthread
-	
-client: client.o
+client: client.o 
 	$(CC) $< -o client
-
-Active_Object: Active_Object.o $(HEADERS)
-	$(CC) $< -o Active_Object -lpthread main1
+	
+server: server.o main1.o Active_Object.o
+	$(CC) $< main1.o Active_Object.o -o server -lpthread
 
 Queue: main1.o $(HEADERS)
 	$(CC) $< -o main1 -lpthread
+
+Active_Object: Active_Object.o $(HEADERS)
+	$(CC) $< -o Active_Object -lpthread main1
 	
 %.o: %.c
 	$(CC) -c $< -o $@

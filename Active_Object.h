@@ -11,6 +11,6 @@ typedef struct active_object {
 
 }AO;
 
-AO *newAO(queue*, void*, void*);
+AO *newAO(queue* Q, void* f1, void* f2);
 void* runAO(void* temp);
-void destroyAO(AO*);
+void destroyAO(AO *active_Obj);

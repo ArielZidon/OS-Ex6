@@ -13,7 +13,7 @@
 #include <arpa/inet.h>
 
 #define PORT "3490" // the port client will be connecting to 
-#define MAXDATASIZE 2048 // max number of bytes we can get at once 
+#define MAXDATASIZE 2048 // max number of length we can get at once 
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)

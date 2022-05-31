@@ -5,7 +5,8 @@
 #include <stdio.h>
 
 
-void* runAO(void* temp) {
+void* runAO(void* temp) 
+{
     AO *active_Obj = (AO*)temp;
     while (active_Obj->run) { 
         void* handled_now = active_Obj->f1(deQ(active_Obj->Q)); // wait on cond
@@ -15,7 +16,8 @@ void* runAO(void* temp) {
     free(active_Obj);
 }
 
-AO* newAO(queue* Q, void* f1, void* f2) {
+AO* newAO(queue* Q, void* f1, void* f2) 
+{
     AO *active_Obj = (AO*)malloc(sizeof(AO));
     active_Obj->f1 = f1;
     active_Obj->f2 = f2;
@@ -26,7 +28,8 @@ AO* newAO(queue* Q, void* f1, void* f2) {
     return active_Obj;
 }
 
-void destroyAO(AO* active_Obj) {
+void destroyAO(AO* active_Obj) 
+{
     active_Obj->run=false;
     free(active_Obj->p);
     free(active_Obj);
