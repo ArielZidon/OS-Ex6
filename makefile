@@ -26,10 +26,6 @@ PollServer: PollServer.o
 Pclient: Pclient.o
 	$(CC) $<  -o Pclient $(FLAGS)
 
-# clientsTest: clientsTest.o
-# 	$(CC) clientsTest.o -o clientsTest
-
-
 %.o: %.c
 	$(CC) -c $< -o $@
 
