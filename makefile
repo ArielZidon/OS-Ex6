@@ -1,25 +1,37 @@
 .PHONY: all run clean
 CC = gcc
-CXX= g++
-FLAGS= 
-HEADERS = Queue.h Active_Object.h 
-all: server main1 client Active_Object 
+GG = g++
+FLAGS= -pthread
+HEADERS = 
+all: clientsTest Guard singleton Pclient PollServer server client
 
+server: server.o Active_Object.o main1.o  
+	$(CC) server.o Active_Object.o main1.o -o server $(FLAGS)
 
-client: client.o 
+# Active_Object: main1.o Active_Object.o
+# 	$(CC) Active_Object.o main1.o -o Active_Object $(FLAGS)
+
+client: client.o
 	$(CC) $< -o client
-	
-server: server.o main1.o Active_Object.o
-	$(CC) $< main1.o Active_Object.o -o server -lpthread
 
-Queue: main1.o $(HEADERS)
-	$(CC) $< -o main1 -lpthread
+Guard: 
+	$(GG) Guard.cpp -o Guard $(FLAGS)
 
-Active_Object: Active_Object.o $(HEADERS)
-	$(CC) $< -o Active_Object -lpthread main1
-	
+singleton: 
+	$(GG) singleton.cpp -o singleton $(FLAGS)
+
+PollServer: PollServer.o
+	$(CC) $<  -o PollServer $(FLAGS)
+
+Pclient: Pclient.o
+	$(CC) $<  -o Pclient $(FLAGS)
+
+# clientsTest: clientsTest.o
+# 	$(CC) clientsTest.o -o clientsTest
+
+
 %.o: %.c
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f *.o server client Active_Object
+	rm -f *.o main1 clientsTest Guard singleton Pclient Active_Object PollServer server client
