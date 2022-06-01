@@ -3,7 +3,7 @@ CC = gcc
 GG = g++
 FLAGS= -pthread
 HEADERS = 
-all: clientsTest Guard singleton Pclient PollServer server client
+all: clientsTest Guard singleton SelectClient PollServer server client
 
 server: server.o Active_Object.o main1.o  
 	$(CC) server.o Active_Object.o main1.o -o server $(FLAGS)
@@ -23,11 +23,11 @@ singleton:
 PollServer: PollServer.o
 	$(CC) $<  -o PollServer $(FLAGS)
 
-Pclient: Pclient.o
-	$(CC) $<  -o Pclient $(FLAGS)
+SelectClient: SelectClient.o
+	$(CC) $<  -o SelectClient $(FLAGS)
 
 %.o: %.c
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f *.o main1 clientsTest Guard singleton Pclient Active_Object PollServer server client
+	rm -f *.o main1 clientsTest Guard singleton SelectClient Active_Object PollServer server client

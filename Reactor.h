@@ -25,6 +25,6 @@ typedef struct reqests
     preactor reac;
 } reqests, *preqests;
 
-preactor newR();
-void Install(preactor rc, pfunc newFunc, int file_des);
-void Remove(preactor reac, int fd_free);
+preactor newReactor();
+void InstallHandler(preactor rc, pfunc newFunc, int file_des);
+void RemoveHandler(preactor reac, int fd_free);

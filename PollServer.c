@@ -19,12 +19,12 @@ void *get_in_addr(struct sockaddr *sa)
 
     return &(((struct sockaddr_in6 *)sa)->sin6_addr);
 }
-preactor newR()
+preactor newReactor()
 {
     preactor res = (preactor)(malloc(sizeof(reactor)));
     return res;
 }
-void Install(preactor rc, pfunc newFunc, int file_des)
+void InstallHandler(preactor rc, pfunc newFunc, int file_des)
 {
     rc->func = newFunc;
     rc->fileID = file_des;
@@ -33,7 +33,7 @@ void Install(preactor rc, pfunc newFunc, int file_des)
     rq->reac = rc;
     pthread_create(&rc->threadID, NULL, newFunc, rq);
 }
-void Remove(preactor reac, int fd_free)
+void RemoveHandler(preactor reac, int fd_free)
 {
     pthread_join(reac->threadID, NULL);
     reac->fileID = -1;
@@ -114,7 +114,7 @@ void add_to_pfds(struct pollfd *pfds[], int newfd, int *fd_count, int *fd_size)
     (*fd_count)++;
 }
 
-// Remove an index from the set
+// RemoveHandler an index from the set
 void del_from_pfds(struct pollfd pfds[], int i, int *fd_count)
 {
     // Copy the one from the end over this one
@@ -225,8 +225,8 @@ int main(void)
                                          get_in_addr((struct sockaddr *)&remoteaddr),
                                          remoteIP, INET6_ADDRSTRLEN),
                                newfd);
-                        preactor reac = (preactor)newR();
-                        Install(reac, &myTreadFunc, newfd);
+                        preactor reac = (preactor)newReactor();
+                        InstallHandler(reac, &myTreadFunc, newfd);
                     }
                 }
                 else
