@@ -1,12 +1,13 @@
 .PHONY: all run clean
 CC = gcc
 GG = g++
+OBJECTS = Queue.o 
 FLAGS= -pthread
 HEADERS = 
-all: clientsTest Guard singleton SelectClient PollServer server client
+all: clientsTest Guard singleton SelectClient PollServer main1 client lib.so
 
-server: server.o Active_Object.o main1.o  
-	$(CC) server.o Active_Object.o main1.o -o server $(FLAGS)
+main1: main1.o Active_Object.o Queue.o  
+	$(CC) main1.o Active_Object.o Queue.o -o main1 $(FLAGS)
 
 # Active_Object: main1.o Active_Object.o
 # 	$(CC) Active_Object.o main1.o -o Active_Object $(FLAGS)
@@ -14,10 +15,10 @@ server: server.o Active_Object.o main1.o
 client: client.o
 	$(CC) $< -o client
 
-Guard: 
+Guard: Guard.o
 	$(GG) Guard.cpp -o Guard $(FLAGS)
 
-singleton: 
+singleton: singleton.o
 	$(GG) singleton.cpp -o singleton $(FLAGS)
 
 PollServer: PollServer.o
@@ -26,8 +27,11 @@ PollServer: PollServer.o
 SelectClient: SelectClient.o
 	$(CC) $<  -o SelectClient $(FLAGS)
 
+lib.so: $(OBJECTS)
+	$(CC) --shared -fPIC -pthread $(OBJECTS) -o lib.so
+
 %.o: %.c
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f *.o main1 clientsTest Guard singleton SelectClient Active_Object PollServer server client
+	rm -f *.o Queue clientsTest Guard singleton SelectClient Active_Object PollServer main1 client lib.so

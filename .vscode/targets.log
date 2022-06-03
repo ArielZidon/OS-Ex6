@@ -1,0 +1,565 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+ 
+# Built for x86_64-pc-linux-gnu
+ 
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+ 
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+ 
+# This is free software: you are free to change and redistribute it.
+ 
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+ 
+# Make data base, printed on Fri Jun  3 13:02:05 2022
+ 
+
+# Variables
+ 
+
+ 
+# 'override' directive
+ 
+GNUMAKEFLAGS := 
+ 
+# automatic
+ 
+<D = $(patsubst %/,%,$(dir $<))
+ 
+# automatic
+ 
+?F = $(notdir $?)
+ 
+# environment
+ 
+DESKTOP_SESSION = ubuntu
+ 
+# default
+ 
+.SHELLFLAGS := -c
+ 
+# environment
+ 
+XDG_SESSION_CLASS = user
+ 
+# environment
+ 
+SNAP_COMMON = /var/snap/code/common
+ 
+# environment
+ 
+XDG_SESSION_TYPE = x11
+ 
+# environment
+ 
+VSCODE_LOG_NATIVE = false
+ 
+# automatic
+ 
+?D = $(patsubst %/,%,$(dir $?))
+ 
+# environment
+ 
+IM_CONFIG_PHASE = 1
+ 
+# automatic
+ 
+@D = $(patsubst %/,%,$(dir $@))
+ 
+# environment
+ 
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+ 
+# environment
+ 
+GDMSESSION = ubuntu
+ 
+# environment
+ 
+XMODIFIERS = @im=ibus
+ 
+# makefile
+ 
+CURDIR := /home/ariel/Desktop/Os/Ex6
+ 
+# makefile
+ 
+SHELL = /bin/sh
+ 
+# environment
+ 
+SNAP_DATA = /var/snap/code/97
+ 
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# environment
+JOURNAL_STREAM = 8:34589
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# environment
+SNAP_INSTANCE_NAME = code
+# environment
+SNAP_ARCH = amd64
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+# makefile (from 'makefile', line 4)
+OBJECTS = Queue.o 
+# environment
+USERNAME = ariel
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=08c2cc03086cb0f755cfd8a7628dfccc
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+_ = /snap/code/97/usr/share/code/code
+# environment
+MANAGERPID = 1377
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+VSCODE_CWD = /home/ariel
+# environment
+GSETTINGS_SCHEMA_DIR = /snap/code/97/usr/share/glib-2.0/schemas
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+SESSION_MANAGER = local/ariel-VirtualBox:@/tmp/.ICE-unix/1635,unix/ariel-VirtualBox:/tmp/.ICE-unix/1635
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/ariel/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+SNAP = /snap/code/97
+# environment
+SNAP_VERSION = c3511e6c
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+DISABLE_WAYLAND = 1
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+INVOCATION_ID = b68470212ba44d1e80c7c6297948fd9a
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = 
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 223875
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+SNAP_INSTANCE_KEY = 
+# environment
+PWD = /home/ariel/Desktop/Os/Ex6
+# default
+.LOADED := 
+# environment
+SSH_AGENT_PID = 1585
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/ariel
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /home/ariel/.config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+# environment
+LOGNAME = ariel
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# environment
+SNAP_CONTEXT = AhoqInG6s3zdxWAOZi6bFuTiW0evPNAInheW-vMCCB8JIEVgln5j
+# makefile (from 'makefile', line 6)
+HEADERS = 
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+SNAP_USER_COMMON = /home/ariel/snap/code/common
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# environment
+SNAP_REAL_HOME = /home/ariel
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# environment
+SNAP_USER_DATA = /home/ariel/snap/code/97
+# environment
+SHLVL = 0
+# makefile (from 'makefile', line 2)
+CC = gcc
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-881ac55d-0259-49b1-b281-1dabe5b12ba5.sock
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = ariel
+# environment
+SNAP_REVISION = 97
+# makefile
+.DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+LANGUAGE = en_IL:en
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-b25800ed-1.67.2-main.sock
+# environment
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# automatic
++F = $(notdir $+)
+# environment
+QT_ACCESSIBILITY = 1
+# default
+MAKEFILES := 
+# environment
+SNAP_COOKIE = AhoqInG6s3zdxWAOZi6bFuTiW0evPNAInheW-vMCCB8JIEVgln5j
+# automatic
+<F = $(notdir $<)
+# environment
+SNAP_NAME = code
+# environment
+LC_ALL = C
+# environment
+DBUS_STARTER_BUS_TYPE = session
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# makefile (from 'makefile', line 5)
+FLAGS = -pthread
+# environment
+SNAP_REEXEC = 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# makefile (from 'makefile', line 3)
+GG = g++
+# environment
+LANG = C
+# environment
+VSCODE_PID = 223918
+# environment
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=08c2cc03086cb0f755cfd8a7628dfccc
+# variable set hash-table stats:
+# Load=126/1024=12%, Rehash=0, Collisions=20/152=13%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2053, inode 1585750): 34 files, 2 impossibilities.
+
+# 34 files, 2 impossibilities in 1 directories.
+
+# Implicit Rules
+
+%.o: %.c
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+clientsTest:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-03 13:01:43.105530266
+#  File has been updated.
+#  Successfully updated.
+
+all: clientsTest Guard singleton SelectClient PollServer server client lib.so
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+Queue.o: Queue.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Queue'
+#  Last modified 2022-06-03 13:01:44.549807054
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+client: client.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:44.62982226
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 16):
+	$(CC) $< -o client
+
+.PHONY: all run clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+PollServer.o: PollServer.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'PollServer'
+ 
+#  Last modified 2022-06-03 13:01:44.401778925
+ 
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+PollServer: PollServer.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:44.421782726
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 25):
+	$(CC) $<  -o PollServer $(FLAGS)
+
+# Not a target:
+client.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 23:36:41.327302385
+#  File has been updated.
+#  Successfully updated.
+
+client.o: client.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'client'
+#  Last modified 2022-06-03 13:01:44.609818459
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+server.o: server.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'server'
+#  Last modified 2022-06-03 13:01:44.47779337
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+server: server.o Active_Object.o Queue.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:44.565810095
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 10):
+	$(CC) server.o Active_Object.o Queue.o -o server $(FLAGS)
+
+singleton: singleton.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:44.285756877
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 22):
+	$(GG) singleton.cpp -o singleton $(FLAGS)
+
+# Not a target:
+singleton.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-03 13:01:43.961695192
+#  File has been updated.
+#  Successfully updated.
+
+SelectClient.o: SelectClient.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'SelectClient'
+#  Last modified 2022-06-03 13:01:44.333766
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+SelectClient: SelectClient.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:44.353769802
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 28):
+	$(CC) $<  -o SelectClient $(FLAGS)
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-03 13:01:31.531083622
+#  File has been updated.
+#  Successfully updated.
+
+Active_Object.o: Active_Object.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Active_Object'
+#  Last modified 2022-06-03 13:01:44.513800212
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 34):
+	$(CC) -c $< -o $@
+
+# Not a target:
+Queue.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-03 12:08:18.936702384
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+PollServer.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-01 19:44:19.157883645
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+server.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-03 11:38:48.317977649
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+SelectClient.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-01 13:42:58.992059277
+#  File has been updated.
+#  Successfully updated.
+
+run:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 37):
+	rm -f *.o Queue clientsTest Guard singleton SelectClient Active_Object PollServer server client lib.so
+
+Guard: Guard.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:43.705645868
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 19):
+	$(GG) Guard.cpp -o Guard $(FLAGS)
+
+# Not a target:
+Guard.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-03 13:01:43.373581901
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Active_Object.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 17:57:31.046657665
+#  File has been updated.
+#  Successfully updated.
+
+lib.so: Queue.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-06-03 13:01:44.657827582
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 31):
+	$(CC) --shared -fPIC -pthread $(OBJECTS) -o lib.so
+
+# files hash-table stats:
+# Load=29/1024=3%, Rehash=0, Collisions=11/90=12%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 48 / storage = 461 B / avg = 9 B
+# current buf: size = 8162 B / used = 461 B / count = 48 / avg = 9 B
+
+# strcache performance: lookups = 109 / hit rate = 55%
+# hash-table stats:
+# Load=48/8192=1%, Rehash=0, Collisions=1/109=1%
+# Finished Make data base on Fri Jun  3 13:02:05 2022
+
+ 
